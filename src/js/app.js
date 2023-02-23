@@ -7,6 +7,9 @@
 // 7 TODO: Create a function to create a DOM element.
 
 
+// API DOCS: https://api.relysia.com/docs/static/index.html
+// SDK DOCS: https://docs.relysia.com/getting-started/setup
+
 import RelysiaSDK from 'relysia';
 
 const relysia = new RelysiaSDK();
