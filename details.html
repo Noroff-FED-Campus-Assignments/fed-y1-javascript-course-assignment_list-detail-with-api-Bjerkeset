@@ -9,24 +9,72 @@
       name="keywords"
       content="HTML, CSS, JavaScript, _REPLACE_WITH_KEYWORD_"
     />
-    <meta name="author" content="_YOUR_NAME_" />
+    <meta name="author" content="Bendik Bjerkeset" />
     <link rel="stylesheet" href="/style.css" />
-    <!-- TODO: Import Javascript -->
     <title>_REPLACE_WITH_OBJECT_TITLE | _REPLACE_SITE_NAME</title>
   </head>
   <body class="animate__animated animate__fadeIn">
     <header class="l-header">
-      <h1><span id="js-h1">_REPLACE_WITH_OBJECT_TITLE</span>Details</h1>
+      <h1><span id="js-h1"></span></h1>
     </header>
-
     <main class="l-main">
       <article>
-        <!-- TODO: Insert loading indicator and replace with object detail properties -->
+        <div class="detail__container"></div>
+        <div id="js-error-container"></div>
       </article>
     </main>
-
+    <a href=""></a>
     <footer class="l-footer">
-      <small>Created with ❤️ by _REPLACE_</small>
+      <small>Created with ❤️ by Bendik Bjerkeset</small>
     </footer>
+
+    <script>
+
+const detailContainer = document.querySelector(".detail__container");
+const errorContainer = document.querySelector("#js-error-container");
+const titleElement = document.querySelector("#js-h1")
+
+const queryString = document.location.search;
+const params = new URLSearchParams(queryString);
+
+const id = params.get("id");
+
+const url = `https://api.relysia.com/v1/token/${id}`;
+
+function createHtml(details) {
+
+  titleElement.innerHTML = details.data.name
+  document.title = details.data.name + ' | Ticket List';
+
+  detailContainer.innerHTML = `
+  <div class = "card__description">
+    <h4>${details.data.name}</h4>
+    <div class="details-description"><p>${details.data.description}</p></div>
+    <div class="details-description"><p>Legal term: ${details.data.properties.legal.terms}</p></div>
+    <div class="details-description"><p>Issuer: ${details.data.properties.issuer.organisation}</p></div>
+    <div class="details-description"><p>View in Block Explorer: <a href="https://whatsonchain.com/tx/${details.data.contract_txs}">Whatsonchain</a></p></div>
+  </div>
+    `;
+}
+
+async function fetchTicketDetails() {
+
+  try {
+    const response = await fetch(url);
+    const details = await response.json();
+
+    console.log(details);
+
+    createHtml(details);
+  } catch (error) {
+    console.log(error);
+    errorContainer.innerHTML = ("error:", error);
+  }
+
+};
+
+fetchTicketDetails();
+    </script>
+
   </body>
 </html>

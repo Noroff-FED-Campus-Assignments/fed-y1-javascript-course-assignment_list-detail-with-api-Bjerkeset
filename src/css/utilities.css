@@ -5,6 +5,11 @@
  * @example https://fed-vocational-astro-course.vercel.app/en/html-css/module-3/media-queries
  */
 
+/* NOTE: loading indicator */
+.show {
+  display: block;
+}
+
 .is-hidden {
   display: none;
 }
@@ -16,3 +21,13 @@
 .is-visible {
   opacity: 1;
 }
+
+/* NOTE: Form error */
+.error {
+  border: 2px solid red;
+  background-color: red;
+}
+
+/* body {
+  background-color: red;
+} */

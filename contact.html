@@ -4,17 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="_REPLACE_WITH_DESCRIPTION_" />
+    <meta name="description" content="Login and contact form" />
     <meta
       name="keywords"
-      content="HTML, CSS, JavaScript, _REPLACE_WITH_KEYWORD_"
+      content="HTML, CSS, JavaScript, vite, relysia"
     />
-    <meta name="author" content="_YOUR_NAME_" />
+    <meta name="author" content="Bendik Bjerkeset" />
     <link rel="stylesheet" href="/style.css" />
-    <!-- TODO: Import Javascript -->
-    <script defer type="module" src="./src/js/app.js"></script>
-    <script defer type="module" src="./src/js/contact.js"></script>
-    <title>Contact Us | _REPLACE_SITE_NAME</title>
+    <title>Contact Us | Ticket List</title>
   </head>
   <body class="animate__animated animate__fadeIn">
     <header class="l-header">
@@ -23,39 +20,149 @@
 
     <main class="l-main">
       <article role="doc-introduction">
-        <h2>Contact form</h2>
-
-        <p>_REPLACE_INTRODUCTION_</p>
+        <h2>Loggin / Contact form</h2>
+        <p>This page contains a contact form where users can fill in their name, email, password, subject, and address. The form includes validation to ensure that users enter information in the correct format, and it has reset and submit buttons. The email and password input field only accepts the valid value.</p>
       </article>
 
       <section role="form-section">
-        <!-- TODO: Creat Form elements here -->
         <form action="" id="form__js" autocomplete="on">
-
+          
           <div class="form-group__container">
-            <label for="email__js">Email</label>
-            <input type="email" id="email__js">
-            <p class="validation__container"></p>
+            <label for="name__js">Full Name</label> <br>
+            <input placeholder="Ola Normann" type="text" id="name__js"> <br>
+            <p class="validation__container" id="message-container__js--name"></p> <br>
           </div>
 
           <div class="form-group__container">
-            <label for="password__js">Password</label>
-            <input type="password" id="password__js">
-            <p class="validation__container"></p>
+            <label for="email__js">Email: bb.bjerk@gmail.com</label> <br>
+            <input placeholder="bb.bjerk@gmail.com" type="email" id="email__js"> <br>
+            <p class="validation__container" id="message-container__js--email"></p> <br>
           </div>
           
           <div class="form-group__container">
-            <label for="name__js">Name</label>
-            <input type="text" id="name__js">
-            <p class="validation__container"></p>
+            <label for="password__js">Password: @TKeb2qQ6uU8</label> <br>
+            <input placeholder="password" type="password" id="password__js"> <br>
+            <p class="validation__container" id="message-container__js--password"></p> <br>
           </div>
 
+          <div class="form-group__container">
+            <label for="subject__js">Subject</label> <br>
+            <input placeholder="Some subject..." type="text" id="subject__js"> <br>
+            <p class="validation__container" id="message-container__js--subject"></p> <br>
+          </div>
+          
+          <div class="form-group__container">
+            <label for="address__js">Address</label> <br>
+            <input placeholder="An address thats atleast 25 characters long" type="text" id="address__js"> <br>
+            <p class="validation__container" id="message-container__js--address"></p> <br>
+          </div>
+          
+          <button type="reset">Reset</button>
+          <button type="submit">Submit</button>
+          <p class="successMessage__js"></p> <br>
         </form>
       </section>
     </main>
 
     <footer class="l-footer">
-      <small>Created with ❤️ by _REPLACE_</small>
+      <small>Created with ❤️ by Bendik Bjerkeset</small>
     </footer>
+    
+    <script>
+// NOTE: Get DOM elements from the DOM
+const formElement = document.querySelector('#form__js');
+const emailElement = document.querySelector('#email__js');
+const passwordElement = document.querySelector('#password__js');
+const nameElement = document.querySelector('#name__js');
+const subjectElement = document.querySelector("#subject__js")
+const addressElement = document.querySelector("#address__js")
+const nameMessageContainerElement = document.querySelector('#message-container__js--name');
+const messageContainerElement = document.querySelector("#message-container")
+const emailMessageContainerElement = document.querySelector('#message-container__js--email');
+const passwordMessageContainerElement = document.querySelector('#message-container__js--password');
+const subjectMessageContainerElement = document.querySelector('#message-container__js--subject');
+const addressMessageContainerElement = document.querySelector('#message-container__js--address');
+const successMessage = document.querySelector(".successMessage__js");
+const resetButton = document.querySelector('button[type="reset"]');
+const submitButton = formElement.querySelector('button[type="submit"]');
+const validationContainer = document.querySelectorAll(".validation__container")
+
+function validateForm(event) {
+  event.preventDefault();
+  const nameInput = nameElement.value;
+  const nameRegex = /^[a-zA-Z]{2,} [a-zA-Z]{2,}$/; // NOTE: Must be min 2 words with min 2 characters divided by min 1 space.
+  const isValidName = nameRegex.test(nameInput);
+  
+  const emailInput = emailElement.value;
+  const emailRegex = /^bb\.bjerk@gmail\.com$/i; // NOTE: Must match (upper or lowercase).
+  const isValidEmail = emailRegex.test(emailInput)
+
+  const passwordInput = passwordElement.value;
+  const passwordRegex = /^@TKeb2qQ6uU8$/; // NOTE: Must match exactly
+  const isValidPassword = passwordRegex.test(passwordInput)
+  
+  const subjectInput = subjectElement.value;
+  const subjectRegex = /^.{10,}$/ // NOTE: String of with minimum length of 10.
+  const isValidSubject = subjectRegex.test(subjectInput)
+  
+  const addressInput = addressElement.value;
+  const addressRegex = /^.{25,}$/ // NOTE: String of with minimum length of 25.
+  const isValidAddress = addressRegex.test(addressInput)
+  
+  // NOTE: NOT IN USE: Stores email and password for use as parameters in fetchAuthToken()
+      // localStorage.setItem("email", emailElement);
+      // localStorage.setItem("password", passwordElement)      
+  
+  if (!isValidName) {
+    nameMessageContainerElement.textContent = "Please enter a valid name";
+    nameMessageContainerElement.classList.add("error");
+  } 
+  if (!isValidEmail) {
+    emailMessageContainerElement.textContent = "Please enter a valid email";
+    emailMessageContainerElement.classList.add("error");
+  }
+  if (!isValidPassword) {
+    passwordMessageContainerElement.textContent = "Please enter a valid email";
+    passwordMessageContainerElement.classList.add("error");
+  }
+  if (!isValidSubject) {
+    subjectMessageContainerElement.textContent = "Please enter a valid subject";
+    subjectMessageContainerElement.classList.add("error");
+  }
+  if (!isValidAddress) {
+    addressMessageContainerElement.textContent = "Please enter a valid address";
+    addressMessageContainerElement.classList.add("error");
+  }
+  else {
+    // NOTE: Disables the submit button
+    submitButton.disabled = true;
+    return true;
+  }
+}
+
+
+formElement.addEventListener("submit", function(event) {
+  const isFormValid = validateForm(event);
+
+  if (isFormValid) {
+    successMessage.textContent = "Success!!";
+  }
+  return false;
+});
+
+
+// NOTE: Removes success message and enables submit button
+resetButton.addEventListener("click", function() {
+  successMessage.textContent = "";
+  submitButton.disabled = false; 
+  
+// NOTE: Removes error message and error class
+  for (let i = 0; i < validationContainer.length; i++) {
+    validationContainer[i].innerHTML = "";
+    validationContainer[i].classList.remove("error");
+}
+});
+
+    </script>
   </body>
 </html>

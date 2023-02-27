@@ -6,4 +6,7 @@
 
 :root {
   /* Add your CSS variables here */
+  --clr-card: rgb(49, 49, 147);
+  --clr-card-2: rgb(45, 45, 122);
+  --clr-error: red;
 }

@@ -8,3 +8,51 @@
 .c-card {
   border-radius: --radius-1;
 }
+
+.l-main {
+}
+
+.content__section {
+}
+
+#js-list-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card__details {
+  height: 300px;
+  width: 250px;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: var(--clr-card);
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.card__details:hover {
+  background-color: var(--clr-card-2);
+}
+.card__details h2 {
+  font-size: 1rem;
+}
+
+.card__detail {
+}
+
+/* Details Description */
+
+.card__description {
+  background-color: var(--clr-card-2);
+  padding: 50px 25px;
+  border-radius: 10px;
+}
+.details-description {
+  /* background-color: rgb(45, 45, 122); */
+  padding: 15px 0;
+}

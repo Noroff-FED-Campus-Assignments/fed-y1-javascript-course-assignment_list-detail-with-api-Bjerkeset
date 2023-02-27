@@ -4,25 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="_REPLACE_WITH_DESCRIPTION_" />
+    <meta name="description" content="Ticket list Homepage" />
     <meta
       name="keywords"
-      content="HTML, CSS, JavaScript, _REPLACE_WITH_KEYWORD_"
+      content="HTML, CSS, JavaScript, relysia, vite"
     />
-    <meta name="author" content="_YOUR_NAME_" />
-    <link rel="stylesheet" href="/style.css" />
-    <!-- TODO: Import Javascript -->
-    <!-- <script defer type="module" src="./src/js/app.js"></script> -->
+    <meta name="author" content="Bendik Bjerkeset" />
+    <link rel="stylesheet" href="/style.css" />    
     <script src="https://cdn.jsdelivr.net/npm/relysia@1.0.6/dist/relysia-sdk.js"></script>
-    <title>_REPLACE_SITE_NAME</title>
+    <title>Homepage | Ticket List </title>
   </head>
   <body class="animate__animated animate__fadeIn">
     <header class="l-header">
-      <h1>Home</h1>
       <nav>
         <ul>
           <li><a href="./index.html">Home</a></li>
-          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./contact.html">login</a></li>
         </ul>
       </nav>
     </header>
@@ -31,18 +28,27 @@
       <section role="search"></section>
 
       <article role="doc-introduction">
-        <h2>Ticket List</h2>
-
-        <p>_REPLACE_INTRODUCTION_</p>
+        <h1>Ticket List</h1>
+        <p>This web page is for displaying a list of tickets. The page fetches data from an API and displays the tickets in the main section. The user can filter the tickets by searching for a specific name using the search bar in the page header. The page uses the Relysia SDK to authenticate the user and fetch blockchain data from the API.</p>
       </article>
 
-      <section role="list">
-        <div id="js-list-container">_LOADING_INDICATOR_GOES_HERE_</div>
+      <section class="search__section" role="search">
+        <label for="search-input">Search:</label>
+        <input type="text" id="search-input" placeholder="Enter item name...">
       </section>
+
+      <section class="content__section" role="list">
+        <div id="js-list-container">
+        </div>
+        <div id="js-error-container">
+        </div>
+        <div id="js-loading-indicator" class="loading-indicator"></div>
+      </section>
+
     </main>
 
     <footer class="l-footer">
-      <small>Created with ❤️ by _REPLACE_</small>
+      <small>Created with ❤️ by Bendik Bjerkeset</small>
     </footer>
 
     <script>
@@ -50,75 +56,110 @@
       // SDK DOCS: https://docs.relysia.com/getting-started/setup
 
 const relysia = new RelysiaSDK();
-let authToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjE1YzJiNDBhYTJmMzIyNzk4NjY2YTZiMzMyYWFhMDNhNjc3MzAxOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQmplcmtlc2V0IiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hpdmVkYi1jZGJmNyIsImF1ZCI6ImhpdmVkYi1jZGJmNyIsImF1dGhfdGltZSI6MTY3NzE1MDgwMSwidXNlcl9pZCI6IjI2d3FwcjlqbERWSUZlRHBSRUxDb1pJSGNSUzIiLCJzdWIiOiIyNndxcHI5amxEVklGZURwUkVMQ29aSUhjUlMyIiwiaWF0IjoxNjc3MTUwODAxLCJleHAiOjE2NzcxNTQ0MDEsImVtYWlsIjoiYmIuYmplcmtAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImJiLmJqZXJrQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.TgeWZ9AGO2AaqJ91bBlAFGrREWhgFohOV1ckSeyX7Dxsyj7Gb_4geBQRdLq9I0c-iMYF5MTVC5cFzjWwbtuk4eVNhcLh_fwm158FOGy9zr0G3K4HDAv3ME7qt7v61MEAI1zYe50KziOzpaaocu8kbs_3jhzPY-CqXk_P3LI6hVzPgtLKYITfS0QMWKheBgyp0htaWqVs5uUptESm3rZMY1P5uwZOMUCRXn_g6FMBuFNZ4Bc8vMkzSzSHuGaDltOw1v194hgdfIG_P9-5RBaxBoQvKdns5kyud4Su7zwR04XOh7B1WDjg_edU6GVVdJBA34dlUUOsVNHniaJjW5g_vQ"; 
+let authToken = ""; 
       
 // NOTE: Get containers from the DOM and store value in variables. 
-const listContainer = document.querySelector('#js-list-container');  
+const listContainer = document.querySelector('#js-list-container');
+const loadingIndicator = document.querySelector("#js-loading-indicator");  
+const errorContainer = document.querySelector("#js-error-container");
 listContainer.innerHTML = "";
 
- // TODO: Assign the authToken the returned value of fetchAuthToen() before fetchTickets() runs. 
-fetchAuthToken().then(token => authToken = token);
-// NOTE: Calling functions
+// NOTE: Get the search input element from the DOM and store it in a variable.
+const searchInput = document.querySelector('#search-input');
 
-fetchTickets();
-renderTickets(ticket)
-  
+searchInput.addEventListener('input', function () {
+  const searchTerm = searchInput.value.toLowerCase().trim(); 
+  filterTickets(searchTerm);
+});
+
+
+ // NOTE: Calling functions
+ fetchAuthToken();  
 // NOTE: Fetching the auth token using loggin details. 
 async function fetchAuthToken() {
   try {
-    const response = await relysia.auth({ email: "bb.bjerk@gmail.com", password: "@TKeb2qQ6uU8" });
+    //NOTE: Loggin detail from local storage or defult values.  
+    const response = await relysia.auth({ email: "bb.bjerk@gmail.com", password:  "@TKeb2qQ6uU8" });
     const token = response.token
-    return console.log(token);
+    authToken = token; 
+    localStorage.setItem("token", authToken);
+    
+    fetchTickets();
+    return token;
     
   } catch (error) {
     console.error("Error fetching auth token:", error);
+    errorContainer.innerHTML = ("error", error);
     return null;
   }
+}
+
+// NOTE: search function
+function handleSearch() {
+  const searchTerm = searchInput.value.toLowerCase();
+  filteredTickets = tickets.filter(ticket => ticket.name.toLowerCase().includes(searchTerm) || ticket.symbol.toLowerCase().includes(searchTerm));
+  renderFilteredTickets();
 }
 
 // NOTE: fetching list. 
 async function fetchTickets() {
   try {
+      loadingIndicator.classList.add("show"); // Show the loading indicator
       const url = "https://api.relysia.com/v2/balance";
       const response = await fetch(url, {
           method: "GET",
           headers: {
-              "authToken": authToken,
+              "authToken": localStorage.getItem("token"),
           },
       });
       const data = await response.json();
-      // console.log("ticket data", data);
-
       
       const tickets = data.data.coins;
-      console.log("tickets var", tickets) 
 
       //NOTE: looping response object. 
       for (let i = 0; i < tickets.length; i++) {
           const ticket = tickets[i];            
-          if (!ticket.splitable) {
+          if (!ticket.splitable && !ticket.balance) {  //NOTE: Only loop none-splitteble tokens (NTF's). 
             listContainer.innerHTML += renderTickets(ticket);
-            console.log("Looped ticket", ticket);
           }
       }
 
-      
       } catch (error) {
           console.error("Error fetching balance", error);
-      }
+          errorContainer.innerHTML = ("error", error);
+
+      } finally {
+          loadingIndicator.classList.remove("show"); // NOTE: Hide the loading indicator
+    }
 }
 
-// NOTE: Renders list to dom:  
+function filterTickets(searchTerm) {
+  const tickets = document.querySelectorAll('.card');
+  for (let i = 0; i < tickets.length; i++) {
+    const ticket = tickets[i];
+    const name = ticket.querySelector('.name').textContent.toLowerCase(); 
+    if (name.includes(searchTerm)) {
+      ticket.style.display = '';
+    } else {
+      ticket.style.display = 'none'; 
+    }
+  }
+}
+
 function renderTickets(ticket) {
-    return `
-    <a href="/details.html ?id = ${ticket.name}" class = "card">
-            <div class="details">                                                                                                                                                                    
-            <h2 class="name">${ticket.name}</h2>                                                                                                                                                                                                                                                                                                          
-            <h3 class="name">${ticket.symbol}</h3>                                                                                                                                                                                                                                                                                                          
-            <h6 class="name">Ticket Supply: ${ticket.supply}</h6>                                                                                                                                                                                                                                                                                                          
-            </div>
-            </a>
-            `
+    if (ticket.name && ticket.symbol && ticket.supply) {  // NOTE: Check for required properties
+      return `
+      <a href="/details.html?id=${ticket.tokenId}" class="card__container">
+              <div class="card__details card">                                                                                                                                                                    
+                <div class="card__detail card__name"><h2 class= "name">${ticket.name}</h2></div>                                                                                                                                                                                                                                                                                                          
+                <div class="card__detail card__symbol"><p>${ticket.symbol}</p></div>                                                                                                                                                                                                                                                                                                   
+                <p class="card__detail card__supply">Ticket Supply: ${ticket.supply}</p></div>                                                                                                                                                                                                                                                                                                          
+              </div>
+              </a>
+              `;
+    } else {
+      return undefined;
+    }
 };
     </script>
   </body>

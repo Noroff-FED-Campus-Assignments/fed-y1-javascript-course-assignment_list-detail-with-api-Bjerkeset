@@ -1,4 +1,5 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10218636&assignment_repo_type=AssignmentRepo)
+
 # FED Javascript 1 - Course Assignment
 
 This is a vanilla website that displays a list of items fetched from an API.
@@ -10,11 +11,17 @@ This project was bootstrapped with Vite.
 - [Design](_LINK_TO_FIGMA_)
 - [Production deploy](_LINK_TO_WEBSITE_)
 - [Deployment CI](_LINK_TO_NETLIFY_VERCEL_DASHBOARD_)
-- [API Docs](_LINK_TO_API_DOCS_)
+- [API Docs](https://docs.relysia.com/)
 
 ## Report
 
-_ADD_YOUR_REPORT_HERE_
+This report outlines the course assignment that involved working with API by Bendik Bjerkeset. The focus of this report is to describe the process of selecting an API and my thoughts on the various functionalities offered by the API.
+
+The Relysia API is a tool that delivers a relatively developer-friendly way of interacting with a blockchain. My purpose for building on the Relysia API was to test its features and to become familiar with building web3 solutions. As it relates to potential employment opportunities.
+
+The API enables pull and get requests through an open protocol, which presents several potential real-life use cases. For instance, my project demonstrates how the API can issue tickets. The advantages of this solution include the fact that anyone can interact with the tickets since there is no central database recording ownership. However, there are some drawbacks. The transaction process is complex and requires the user to own some cryptocurrency.
+
+Upon completing this assignment, I plan to continue developing this application. Some of the features that I will be adding include a template page for issuing tickets and a platform to list tickets for sale.
 
 ## Getting Started
 
@@ -28,40 +35,39 @@ In the project directory, you can run:
 
 All of these todo's must be done to pass the asssignment.
 
-- [ ] End-user can see a list of items of the home page.
-- [ ] When the End-user clicks on an item in the list they are navigated to the details page.
-- [ ] End-user can view atleast three properties of an item in a list.
-- [ ] End-user can view atleast three properties of an item on the details page.
-- [ ] A error message is present when the End-user encounters a error while viewing the index page.
-- [ ] A error message is present when the End-user encounters a error while viewing the details page.
-- [ ] End-user can view the title of the item on the browser tab for a details page.
-- [ ] End-user can view validation message when they input an incorrect name.
-- [ ] End-user can view validation message when they input an incorrect subject that is less than 10 characters.
-- [ ] End-user can view validation message when they input an incorrect Email address.
-- [ ] End-user can view a validation message when they input an incorrect physical address that is less than 25 characters long.
+- [x] End-user can see a list of items of the home page.
+- [x] When the End-user clicks on an item in the list they are navigated to the details page.
+- [x] End-user can view atleast three properties of an item in a list.
+- [x] End-user can view atleast three properties of an item on the details page.
+- [x] A error message is present when the End-user encounters a error while viewing the index page.
+- [x] A error message is present when the End-user encounters a error while viewing the details page.
+- [x] End-user can view the title of the item on the browser tab for a details page.
+- [x] End-user can view validation message when they input an incorrect subject that is less than 10 characters.
+- [x] End-user can view validation message when they input an incorrect Email address.
+- [x] End-user can view a validation message when they input an incorrect physical address that is less than 25 characters long.
 
 ## End-user success criteria (Optional - 100%)
 
-- [ ] End-user can search for a specific item.
+- [x] End-user can search for a specific item.
 - [ ] End-user can filter the list.
 - [ ] End-user can sort list by;
   - [ ] Name ascending order
   - [ ] Name descending order
 - [ ] Confirmation modal after custumer submits a successful contact form.
-- [ ] End-user can auto-fill the contact form using the browser auto-fill.
-- [ ] End-user can auto-fill the contact form using a password manager.
-- [ ] Validation still works when End-user uses copy and pastes into input fields.
-- [ ] End-user can see a postive feedback when they input correct info and pass validation.
+- [x] End-user can auto-fill the contact form using the browser auto-fill.
+- [x] End-user can auto-fill the contact form using a password manager.
+- [x] Validation still works when End-user uses copy and pastes into input fields.
+- [x] End-user can see a postive feedback when they input correct info and pass validation.
 - [ ] End-user can experience pleasant animations.
   - [ ] Each item in the list has a staggered animation.
   - [ ] Contact form success modal fades in.
 - [ ] End-user can view a custom favicon.
-- [ ] CSS uses variables
-- [ ] Code is dry - There are no repeating functions, variables.
-- [ ] My commit messages are relavant and make sense. [How to write good commit messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)
+- [x] CSS uses variables
+- [x] Code is dry - There are no repeating functions, variables.
+- [x] My commit messages are relavant and make sense. [How to write good commit messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)
 - [ ] [End-user experiences a complete custom UI design.](https://www.figma.com/file/KExTTAE75DRhq2xTvapFR4/FED-Whiteboard?node-id=0%3A1&t=UItKehGgT8gRlibY-1)
 
-  - [ ] Is user-friendly
+  - [x] Is user-friendly
   - [ ] Effective use of the pillars of design
     - [ ] Typography
     - [ ] COlour
@@ -84,35 +90,35 @@ All of these todo's must be done to pass the asssignment.
 
 Make sure you go through this checklist before submitting your project to Moodle.
 
-- [ ] All pages have a meta description.
-- [ ] All pages have a valid title.
-- [ ] All pages import the correct css files.
-- [ ] All pages import the correct JS file.
-- [ ] Details page URL includes a query param.
-- [ ] My website makes a GET request to an API to get a list of results.
-- [ ] My website makes a GET request to an API to get details of one result.
-- [ ] Input fields have the following attributes;
-- [ ] All images have an alt tag;
-  - [ ] A name,
-  - [ ] A placeholder,
-  - [ ] A aria-describedby,
-  - [ ] Required
-- [ ] I have not copied Javascript code.
-- [ ] I have not used a Javascript library.
-- [ ] Removed all unused files.
-- [ ] Named all images properly.
-- [ ] Committed all my code to github.
-- [ ] My repo is publically viewable.
-- [ ] I've submitted/ written a report.
-- [ ] I've removed all todo notes in code.
-- [ ] I've removed all console logs in code.
-- [ ] Code is formatted correctly.
-- [ ] There are no red underlines in VSCode.
-- [ ] There are no error messages in the terminal when I run the project.
-- [ ] My code is indented correctly.
-- [ ] I've checked my report for grammer & spelling using grammerly or chatGPT
-- [ ] I've used used [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [ ] I've checked off every todo in this README.
+- [x] All pages have a meta description.
+- [x] All pages have a valid title.
+- [x] All pages import the correct css files.
+- [x] All pages import the correct JS file.
+- [x] Details page URL includes a query param.
+- [x] My website makes a GET request to an API to get a list of results.
+- [x] My website makes a GET request to an API to get details of one result.
+- [x] All images have an alt tag;
+- [x] Input fields have the following attributes;
+  - [x] A name,
+  - [x] A placeholder,
+  - [x] A aria-describedby,
+  - [x] Required
+- [x] I have not copied Javascript code.
+- [x] I have not used a Javascript library.
+- [x] Removed all unused files.
+- [x] Named all images properly.
+- [x] Committed all my code to github.
+- [x] My repo is publically viewable.
+- [x] I've submitted/ written a report.
+- [x] I've removed all todo notes in code.
+- [x] I've removed all console logs in code.
+- [x] Code is formatted correctly.
+- [x] There are no red underlines in VSCode.
+- [x] There are no error messages in the terminal when I run the project.
+- [x] My code is indented correctly.
+- [x] I've checked my report for grammer & spelling using grammerly or chatGPT
+- [x] I've used used [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [x] I've checked off every todo in this README.
 
 ## Help & Tutorials
 
@@ -127,8 +133,10 @@ Make sure you go through this checklist before submitting your project to Moodle
 - [Open-props](https://open-props.style/) - Supercharged
   CSS variables.
 - [Animate.css](https://animate.style/) - Just-add-water CSS animations
+- [relysia sdk]
+- [relysia api]
 
 ## Authors
 
-- _YOURE_NAME_ (@_your_github_username_)
+- Bendik Bjerkeset (@Bjerkeset)
 - Monde Sineke (@S3ak)
