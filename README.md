@@ -9,7 +9,7 @@ This project was bootstrapped with Vite.
 ## Resources
 
 - [Design](_LINK_TO_FIGMA_)
-- [Production deploy](_LINK_TO_WEBSITE_)
+- [Production deploy](https://magical-marshmallow-e2cb96.netlify.app/index.html)
 - [Deployment CI](_LINK_TO_NETLIFY_VERCEL_DASHBOARD_)
 - [API Docs](https://docs.relysia.com/)
 

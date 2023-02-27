@@ -14,7 +14,11 @@
 
 .content__section {
 }
-
+nav ul {
+  text-decoration: none;
+  list-style: none;
+  font-size: 1.3rem;
+}
 #js-list-container {
   display: flex;
   flex-direction: row;
